@@ -1,0 +1,19 @@
+.container {
+  position: absolute;
+  top: 56px;
+}
+.user-tree{
+  display: flex;
+}
+
+  .tree{
+    width: 50vw;
+  }
+    .tree-seprator {
+      margin-left: 30px;
+    }
+
+  .info{
+    width: 50vw;
+    height: 60vh;
+  }

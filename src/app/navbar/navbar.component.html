@@ -1,0 +1,35 @@
+<mat-toolbar class="navbar bottom-shadow" [color]="background">
+  <img class="navbar-Logo" alt="Angular Logo" src="../../assets/images/Logo.svg">
+
+  <mat-tab-group mat-stretch-tabs [backgroundColor]="background" class="navbar-tab">
+    <mat-tab *ngFor="let tab of tabs">
+        <ng-template matTabLabel>
+            <span matBadge="5"  matBadgeColor="warn" matBadgeOverlap="false">{{tab.label}}</span>
+        </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+
+  <span class="navbar-seprator"></span>
+  <button mat-icon-button >
+    <mat-icon matBadge="15" matBadgeColor="warn" class="menu-button menuIcon" svgIcon="custom-svg:Alert"></mat-icon>
+  </button>
+  <button mat-icon-button  [matMenuTriggerFor]="salesMenu">
+    <mat-icon class="menu-button menuIcon" svgIcon="custom-svg:Manage"></mat-icon>
+  </button>
+  <button mat-icon-button  [matMenuTriggerFor]="userMenu">
+    <mat-icon class="menu-button menuIcon" svgIcon="custom-svg:User"></mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-menu #salesMenu="matMenu" [overlapTrigger]="false" xPosition="before" yPosition="below">
+  <button mat-menu-item *ngFor="let item of salesMenus" [routerLink]="['/'+item.path]">{{item.label}}</button>
+</mat-menu>
+
+<mat-menu #userMenu="matMenu" [overlapTrigger]="false" xPosition="before" yPosition="below">
+  <div class="userInfo">
+    <span class="name">{{user.name}}</span>
+    <br>
+    <span class="email">{{user.email}}</span>
+  </div>
+  <button mat-menu-item *ngFor="let item of userMenus" [routerLink]="['/'+item.path]">{{item.label}}</button>
+</mat-menu>

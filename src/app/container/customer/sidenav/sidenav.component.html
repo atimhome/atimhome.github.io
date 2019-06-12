@@ -1,0 +1,22 @@
+<div class="collections-header">
+  已選中 {{customersDataSource.data.length}} 筆
+  <button mat-icon-button [disableRipple]="true" class="menu-button collections-header-clears" (click)="MoveRightBack();Clear()">
+    <mat-icon [ngClass]="{'move-right-back': moveRightBack}" svgIcon="custom-svg:Eraser"></mat-icon>
+  </button>
+</div>
+<div class="collections-body">
+  <mat-card class="customer-element-row" [ngClass]="{'customer-element-view': !CanShowInfo(row)}" *ngFor="let row of customersDataSource.data"
+    [@slideInOut]>
+    {{row.name}}
+    <span class="navbar-seprator"></span>
+    <button mat-icon-button class="icon-button" (click)="DisplayInfo(row);">
+      <mat-icon svgIcon="custom-svg:View" *ngIf="CanShowInfo(row); else UnView"></mat-icon>
+      <ng-template #UnView>
+        <mat-icon svgIcon="custom-svg:UnView"></mat-icon>
+      </ng-template>
+    </button>
+    <button mat-icon-button class="icon-button" (click)="Remove(row)">
+      <mat-icon>clear</mat-icon>
+    </button>
+  </mat-card>
+</div>

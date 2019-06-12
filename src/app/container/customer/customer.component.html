@@ -1,0 +1,43 @@
+<!--工具列-->
+<mat-toolbar class="navbar bottom-shadow" [color]="background">
+  <button mat-icon-button (click)="showSlider = !showSlider">
+    <mat-icon svgIcon="custom-svg:Sliders" class="menu-button" [@flip]="showSlider"></mat-icon>
+  </button>
+  <span class="navbar-seprator"></span>
+  <button mat-icon-button (click)="Add()">
+    <mat-icon svgIcon="custom-svg:Create" class="menu-button"></mat-icon>
+  </button>
+  <button mat-icon-button>
+    <mat-icon svgIcon="custom-svg:Receipt" class="menu-button"></mat-icon>
+  </button>
+  <button mat-icon-button [matMenuTriggerFor]="exportMenu">
+    <mat-icon svgIcon="custom-svg:Export" class="menu-button"></mat-icon>
+  </button>
+  <button mat-icon-button>
+    <mat-icon svgIcon="custom-svg:Move" class="menu-button"></mat-icon>
+  </button>
+  <button mat-icon-button>
+    <mat-icon svgIcon="custom-svg:Delete" class="menu-button"></mat-icon>
+  </button>
+  <button mat-icon-button (click)="toggle();sideCollections.toggle()">
+    <mat-icon [matBadge]="customersDataSource.data.length" [matBadgeHidden]="customersDataSource.data.length === 0 || rotate" matBadgeColor="warn" svgIcon="custom-svg:Menu" [@vertical]="rotate" class="menu-button"></mat-icon>
+  </button>
+</mat-toolbar>
+<!--Menu選項-->
+<mat-menu #exportMenu="matMenu" [overlapTrigger]="false" xPosition="before" yPosition="below">
+  <button mat-menu-item *ngFor="let item of exportMenus" [routerLink]="['/'+item.path]" (click)="item.event.call()">{{item.label}}</button>
+</mat-menu>
+<!--單身-->
+<div class="container" appMouseWheel (mouseWheelUp)="scrollUp()" (mouseWheelDown)="scrollDown()">
+  <mat-sidenav-container hasBackdrop=false autosize>
+    <!--側邊攔-->
+    <mat-sidenav mode="side" position="end" class="collections" fixedInViewport="true" fixedTopGap="104" #sideCollections>
+      <app-sidenav></app-sidenav>
+    </mat-sidenav>
+    <!--主內容-->
+    <mat-sidenav-content class="content">
+      <app-notice></app-notice>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

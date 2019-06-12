@@ -1,0 +1,22 @@
+.navbar {
+  position: fixed;
+  top: 56px;
+  height: 48px;
+  z-index: 2;
+  /*border-top-width:thin;
+  border-top-style: ridge;*/
+}
+
+.container{
+  box-shadow: 0 3px 1px -2px rgba(0,0,0,.2) inset, 0 2px 2px 0 rgba(0,0,0,.14) inset, 0 1px 5px 0 rgba(0,0,0,.12) inset;
+}
+
+  .collections{
+    width:17vw;
+    height: calc(100vh - 56px - 48px);
+    overflow-x: hidden;
+  }
+
+  .content{
+    margin-top:calc(56px + 48px);
+  }

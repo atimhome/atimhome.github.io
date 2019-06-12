@@ -1,0 +1,103 @@
+<div class="customer-table">
+<mat-table [dataSource]="customersDataSource" matSort>
+  <ng-container matColumnDef="check">
+    <mat-header-cell *matHeaderCellDef>
+      <mat-checkbox color="primary" (change)="$event ? masterToggle() : null"
+        [indeterminate]="selection.hasValue() && isSomeSelected() && !isAllSelected()" [checked]="selection.hasValue() && isAllSelected()">
+      </mat-checkbox>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <mat-checkbox color="primary" (change)="$event ? toggle(row) : null" [checked]="selection.isSelected(row)">
+      </mat-checkbox>
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>姓名</mat-header-cell>
+    <mat-cell *matCellDef="let row" (click)="openSnackBar(row.name)">{{ row.name }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="account">
+    <mat-header-cell *matHeaderCellDef>帳戶</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.account }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="status">
+    <mat-header-cell *matHeaderCellDef>狀態</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.status }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="from">
+    <mat-header-cell *matHeaderCellDef>來源</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.from }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="country">
+    <mat-header-cell *matHeaderCellDef>國家</mat-header-cell>
+    <mat-cell *matCellDef="let row" (click)="openSnackBar(row.country)">{{ row.country }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="sale">
+    <mat-header-cell *matHeaderCellDef>拋出者</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.sale }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="reason">
+    <mat-header-cell *matHeaderCellDef>原因</mat-header-cell>
+    <mat-cell *matCellDef="let row" (click)="openSnackBar(row.reason)">{{ row.reason }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="updateTime">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>更新</mat-header-cell>
+    <mat-cell *matCellDef="let row">{{ row.updateTime | date:'yyyy/MM/dd HH:mm' }}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="management">
+    <mat-header-cell *matHeaderCellDef></mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <button mat-icon-button class="icon-button">
+        <mat-icon svgIcon="custom-svg:Edit"></mat-icon>
+      </button>
+      <button mat-icon-button class="icon-button">
+        <mat-icon svgIcon="custom-svg:Notice"></mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row class="customer-header-row" *matHeaderRowDef="['check', 'name', 'account', 'status', 'from', 'country', 'sale', 'reason', 'updateTime','management']"></mat-header-row>
+  <mat-row class="customer-element-row" *matRowDef="let customerRow; columns: ['check', 'name', 'account', 'status', 'from', 'country', 'sale', 'reason', 'updateTime','management']"></mat-row>
+</mat-table>
+
+<mat-paginator #paginator [length]="totalCount" [pageIndex]="0" [pageSize]="10" [pageSizeOptions]="[10, 25, 50, 100]"
+  (page)="pageChange($event)">
+</mat-paginator>
+
+<div class="drop-zone" ng2FileDrop [uploader]="uploader" [ngClass]="{'drop-zone-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)">
+  Drop Xlsx here
+</div>
+
+<div>
+  <div style="text-align:center">
+    <h1>
+      Welcome to HRM Site!
+    </h1>
+    <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
+  </div>
+  <button mat-raised-button color="primary">Hello World！</button>
+  <div>
+    這是一般的ICON顏色
+    <mat-icon>person</mat-icon>
+  </div>
+  <div>
+    這是加上primary顏色的ICON
+    <mat-icon color="primary">thumb_up</mat-icon>
+  </div>
+  <div>
+    這是加上accent顏色的ICON
+    <mat-icon color="accent">info</mat-icon>
+  </div>
+  <div>
+    這是加上warn顏色的ICON
+    <mat-icon color="warn">warning</mat-icon>
+  </div>
+  <h2>自行註冊SVG icon</h2>
+  <div>
+    <mat-icon svgIcon="custom-svg:Sliders"></mat-icon>
+    <mat-icon svgIcon="custom-svg:Sliders" color="primary"></mat-icon>
+    <mat-icon svgIcon="custom-svg:Sliders" color="accent"></mat-icon>
+    <mat-icon svgIcon="custom-svg:Sliders" color="warn"></mat-icon>
+  </div>
+</div>
+</div>
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3640.2292353034786!2d120.63537361539399!3d24.163692078777903!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x34693df1bd771567%3A0x529fb0f9d45b4246!2z6byO55ubQkhX5aSn5qiT!5e0!3m2!1szh-TW!2stw!4v1521517294738" width="80%" height="450" frameborder="0" style="border:0 top" allowfullscreen=""></iframe>

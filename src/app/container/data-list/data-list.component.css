@@ -1,0 +1,58 @@
+.customer-table {
+  margin-top: calc(76px + 32px);
+  margin-left: 42px;
+  margin-right: 42px;
+}
+
+  .customer-header-row{
+    background-color: #3F51B5;
+  }
+
+  .mat-header-cell{
+    color:white;
+  }
+
+  .customer-element-row .icon-button{
+    display: none;
+  }
+
+  .customer-element-row:hover {
+    background: #f5f5f5;
+  }
+
+    .customer-element-row:hover .icon-button{
+      display:unset;
+    }
+
+  .customer-element-row:active {
+    background: #efefef;
+  }
+
+  .drop-zone{
+    border: dotted 3px lightgray;
+  }
+
+  .drop-zone-over{
+    border: dotted 3px red;
+  }
+
+  .mat-cell.mat-column-name, .mat-cell.mat-column-country, .mat-cell.mat-column-reason{
+    cursor: pointer;
+  }
+
+::ng-deep .slider::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: silver;
+  height: 4px;
+  animation: overline-from-left 3s ease-in;
+}
+
+@keyframes overline-from-left {
+  0%   {right: 100%;}
+  100% {right: 0;}
+}

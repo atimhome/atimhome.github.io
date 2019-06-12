@@ -1,0 +1,33 @@
+<div class="container">
+  <h2>用戶管理</h2>
+  <div class="user-tree">
+    <div class="tree">
+      <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+        <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding>
+          <button mat-icon-button disabled></button>
+          {{node.item}}:{{node.level}}:{{node.expandable}}
+          <button mat-icon-button class="tree-seprator" (click)="node.level== 0?resetRoot():setRoot(node.item)">
+            <mat-icon class="icon-button">{{node.level== 0 ? 'lock_open' : 'lock'}}</mat-icon>
+          </button>
+        </mat-tree-node>
+
+
+        <mat-tree-node *matTreeNodeDef="let node; when: hasChild" matTreeNodePadding>
+          <button mat-icon-button matTreeNodeToggle>
+            <mat-icon>
+              {{treeControl.isExpanded(node) ? 'remove' : 'add'}}
+            </mat-icon>
+          </button>
+          {{node.item}}:{{node.level}}:{{node.expandable}}
+          <button mat-icon-button class="tree-seprator" (click)="node.level== 0?resetRoot():setRoot(node.item)">
+            <mat-icon class="icon-button"> {{node.level== 0 ? 'lock_open' : 'lock'}}</mat-icon>
+          </button>
+          <mat-progress-bar *ngIf="node.isLoading" mode="indeterminate" class="tree-seprator"></mat-progress-bar>
+        </mat-tree-node>
+      </mat-tree>
+    </div>
+    <div class="info">
+      左邊資訊
+    </div>
+  </div>
+</div>

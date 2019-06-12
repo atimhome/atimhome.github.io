@@ -1,0 +1,10 @@
+<ng-container *ngIf="show">
+  <div class="notices bottom-shadow" [style.width.vw]="width" [@accordion]>
+    <mat-chip-list>
+      <mat-chip *ngFor="let notice of notices" (removed)="removeNotice(notice)" class="chip">
+        {{notice.msg}}
+        <mat-icon matChipRemove>cancel</mat-icon>
+      </mat-chip>
+    </mat-chip-list>
+  </div>
+</ng-container>

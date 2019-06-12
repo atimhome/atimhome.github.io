@@ -1,0 +1,11 @@
+::ng-deep .Detailinfo{
+  min-width: 1093px;
+  width: 81.5vw;
+  height: calc(100vh - 56px - 48px);
+  background-color: white;
+}
+
+.InfoCard{
+  width: initial;
+  height: inherit;
+}
